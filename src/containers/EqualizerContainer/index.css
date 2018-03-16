@@ -1,0 +1,10 @@
+.row {
+    width: 100%;
+}
+.block {
+    display: inline-block;
+    height: 200px
+}
+.presetSelectorWrapper{
+    padding-left: 30px
+}

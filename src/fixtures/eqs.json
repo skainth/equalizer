@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Rock",
+    "frequencies": [
+      {
+        "label": "60Hz",
+        "value": -6
+      },
+      {
+        "label": "310Hz",
+        "value": -2
+      },
+      {
+        "label": "1kHz",
+        "value": -2
+      },
+      {
+        "label": "6kHz",
+        "value": -1
+      },
+      {
+        "label": "16kHz",
+        "value": 10
+      }
+    ]
+  },
+  {
+    "name": "Pop",
+    "frequencies": [
+      {
+        "label": "60Hz",
+        "value": 1
+      },
+      {
+        "label": "310Hz",
+        "value": -10
+      },
+      {
+        "label": "1kHz",
+        "value": -7
+      },
+      {
+        "label": "6kHz",
+        "value": 8
+      },
+      {
+        "label": "16kHz",
+        "value": 10
+      }
+    ]
+  },
+  {
+    "name": "Jazz",
+    "frequencies": [
+      {
+        "label": "60Hz",
+        "value": -1
+      },
+      {
+        "label": "310Hz",
+        "value": -12
+      },
+      {
+        "label": "1kHz",
+        "value": -3
+      },
+      {
+        "label": "6kHz",
+        "value": -2
+      },
+      {
+        "label": "16kHz",
+        "value": -6
+      }
+    ]
+  },
+  {
+    "name": "Classical",
+    "frequencies": [
+      {
+        "label": "60Hz",
+        "value": 9
+      },
+      {
+        "label": "310Hz",
+        "value": -10
+      },
+      {
+        "label": "1kHz",
+        "value": -4
+      },
+      {
+        "label": "6kHz",
+        "value": -7
+      },
+      {
+        "label": "16kHz",
+        "value": 10
+      }
+    ]
+  }
+]

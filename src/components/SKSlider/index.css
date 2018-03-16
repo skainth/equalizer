@@ -1,0 +1,43 @@
+.sliderContainer{
+    width: 20px;
+    position: relative;
+}
+.minLabelContainer{
+    position: absolute;
+    top: -4px;
+    left: -35px;
+    cursor: default;
+}
+.maxLabelContainer{
+    position: absolute;
+    bottom: -4px;
+    left: -35px;
+    cursor: default;
+}
+.slider {
+    width: 15px;
+    height: 200px;
+    margin-left: 20px;
+    border: solid 2px #708ca1;
+    background-color: #e2e58a;
+}
+
+.handle {
+    width: 200%;
+    height: 30px;
+    background-color: #e7e3e3;
+    border: solid 2px #708ca1;
+    border-radius: 33px;
+    left: -10px;
+    position: relative;
+}
+
+.slider-wrapper {
+    display: inline-block;
+    width: 20px;
+    height: 150px;
+    margin: 20px;
+}
+.slider-label{
+    margin-top: 15px;
+}
