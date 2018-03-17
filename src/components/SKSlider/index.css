@@ -20,6 +20,7 @@
     margin-left: 20px;
     border: solid 2px #708ca1;
     background-color: #e2e58a;
+    transition: background-color 0.3s ease-out;
 }
 
 .handle {
@@ -30,6 +31,8 @@
     border-radius: 33px;
     left: -10px;
     position: relative;
+    -webkit-transition: top 0.3s ease-out;
+    transition: top 0.3s ease-out;
 }
 
 .slider-wrapper {
