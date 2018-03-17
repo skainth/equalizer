@@ -78,7 +78,12 @@ class Slider extends PureComponent{
     if(handleTop > HANDLE_EDGE.BOTTOM)
       handleTop = HANDLE_EDGE.BOTTOM;
 
-    const percentage = diff / elemHeight;
+    let percentage = diff / elemHeight;
+
+    // chance to optimize here
+    if(percentage > 1){
+      percentage = 1;
+    }
 
     const sliderValue = Math.floor(min + (max - min) * percentage);
 
