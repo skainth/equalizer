@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import './index.css';
 
+const COLORS = {LOW: '#17a086', MEDIUM: '#f5f55f', HIGH: '#ed5562'};
+
 class Slider extends PureComponent{
   constructor(props){
     super(props);
@@ -25,14 +27,14 @@ class Slider extends PureComponent{
     this.updateSliderValue(this.props);
   }
   getSliderColor(percentage){
-    let sliderColor = '#f5f55f';
+    let sliderColor;
     if(percentage < 0.4){
-      sliderColor = '#17a086';
+      sliderColor = COLORS.LOW;
     }else{
       if(percentage < 0.7){
-        sliderColor = '#f5f55f';
+        sliderColor = COLORS.MEDIUM;
       }else{
-        sliderColor = '#ed5562';
+        sliderColor = COLORS.HIGH;
       }
     }
     return sliderColor;
