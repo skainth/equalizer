@@ -25,12 +25,12 @@ class Slider extends PureComponent{
     this.updateSliderValue(this.props);
   }
   getSliderColor(percentage){
-    let sliderColor = 'red';
+    let sliderColor = '#f5f55f';
     if(percentage < 0.4){
       sliderColor = '#17a086';
     }else{
       if(percentage < 0.7){
-        sliderColor = '#f5f54b63';
+        sliderColor = '#f5f55f';
       }else{
         sliderColor = '#ed5562';
       }
