@@ -1,0 +1,12 @@
+.visualizer{
+    transition: width 1s, background-color 1s;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 50px;
+    display: table;
+}
+.visualizer > div{
+    display: table-cell;
+    vertical-align: middle;
+}

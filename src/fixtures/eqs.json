@@ -20,7 +20,7 @@
       },
       {
         "label": "16kHz",
-        "value": 10
+        "value": 8
       }
     ]
   },
@@ -29,7 +29,7 @@
     "frequencies": [
       {
         "label": "60Hz",
-        "value": 1
+        "value": 10
       },
       {
         "label": "310Hz",

@@ -16,13 +16,25 @@ class EqualizerContainer extends PureComponent {
     }
 
     this.handleDropdownChange = this.handleDropdownChange.bind(this);
+    this.sliderChangeHandler = this.sliderChangeHandler.bind(this);
   }
-  sliderChangeHandler(value, label){
-    console.log('value received from slider', label, value);
+  componentDidMount(){
+    this.notifyEqChange();
+  }
+  notifyEqChange(){
+    const {selectedEq} = this.state;
+    const {onEqChange} = this.props;
+    onEqChange && onEqChange(selectedEq);
+  }
+  sliderChangeHandler(){
+    this.notifyEqChange();
   }
   handleDropdownChange(selectedOption){
     const selectedEq = this.props.eqs.find(eq => eq.name === selectedOption.value);
-    this.setState({selectedEq});
+
+    this.setState({selectedEq}, () => {
+      this.notifyEqChange();
+    });
   }
   renderSliders(){
     const {selectedEq = {frequencies: []}} = this.state;
