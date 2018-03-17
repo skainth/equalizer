@@ -6,6 +6,7 @@
     height: 200px
 }
 .presetSelectorWrapper{
+    width:200px;
     padding-left: 30px;
     user-select: none;
 }

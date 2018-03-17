@@ -4,7 +4,7 @@ import './index.css';
 // The colors have and the corresponding ranges have been hard coded,
 // but they can be easily coded as a prop
 
-const COLORS = {LOW: {value: 0.4, color: '#17a086'}, MEDIUM: {value: 0.7, color: '#f5f55f'}, HIGH: {color: '#ed5562'}};
+const COLORS = {LOW: {value: 0.4, color: '#ed5562'}, MEDIUM: {value: 0.7, color: '#f5f55f'}, HIGH: {color: '#17a086'}};
 const HANDLE_EDGE = {TOP: -8, BOTTOM: 90};
 
 class Slider extends PureComponent{
