@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 import './index.css'
 import Slider from '../../components/SKSlider';
 
@@ -13,14 +15,13 @@ class EqualizerContainer extends Component {
       this.state = {selectedEq};
     }
 
-    this.handleEqChange = this.handleEqChange.bind(this);
+    this.handleDropdownChange = this.handleDropdownChange.bind(this);
   }
   sliderChangeHandler(value, label){
-    console.log(label, value);
+    console.log('value received from slider', label, value);
   }
-  handleEqChange(event){
-    const selectedEqIndex = event.currentTarget.value;
-    const selectedEq = this.props.eqs[selectedEqIndex];
+  handleDropdownChange(selectedOption){
+    const selectedEq = this.props.eqs.find(eq => eq.name === selectedOption.value);
     this.setState({selectedEq});
   }
   renderSliders(){
@@ -36,14 +37,16 @@ class EqualizerContainer extends Component {
   }
   renderEqSelector(){
     const {eqs = []} = this.props;
+    const options = eqs.map(({name}) => ({label: name, value: name}));
+    const {selectedEq = {}} = this.state;
+    const selectedOption = {label: selectedEq.name, value: selectedEq.name};
+
     return (
       <div>
-          {this.renderSliders()}
+        {this.renderSliders()}
         <div className='block presetSelectorWrapper'>
           <label htmlFor='presetSelector'>Preset</label>
-          <select id='presetSelector' onChange={this.handleEqChange}>
-            {eqs.map((eq, index) => <option key={eq.name} value={index}>{eq.name}</option>)}
-          </select>
+          <Dropdown id='presetSelector' options={options} onChange={this.handleDropdownChange} value={selectedOption} />
         </div>
       </div>
     );
