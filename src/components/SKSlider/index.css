@@ -4,12 +4,14 @@
 }
 .minLabelContainer{
     position: absolute;
+    user-select: none;
     top: -4px;
     left: -35px;
     cursor: default;
 }
 .maxLabelContainer{
     position: absolute;
+    user-select: none;
     bottom: -4px;
     left: -35px;
     cursor: default;
@@ -31,8 +33,6 @@
     border-radius: 33px;
     left: -10px;
     position: relative;
-    -webkit-transition: top 0.3s ease-out;
-    transition: top 0.3s ease-out;
 }
 
 .slider-wrapper {
@@ -43,4 +43,5 @@
 }
 .slider-label{
     margin-top: 15px;
+    user-select: none;
 }
