@@ -1,7 +1,11 @@
 import React, {PureComponent} from 'react';
 import './index.css';
 
-const COLORS = {LOW: '#17a086', MEDIUM: '#f5f55f', HIGH: '#ed5562'};
+// The colors have and the corresponding ranges have been hard coded,
+// but they can be easily coded as a prop
+
+const COLORS = {LOW: {value: 0.4, color: '#17a086'}, MEDIUM: {value: 0.7, color: '#f5f55f'}, HIGH: {color: '#ed5562'}};
+const HANDLE_EDGE = {TOP: -8, BOTTOM: 90};
 
 class Slider extends PureComponent{
   constructor(props){
@@ -18,8 +22,7 @@ class Slider extends PureComponent{
     }
 
     this.onSliderClick = this.onSliderClick.bind(this);
-    this.onHandleClick = this.onHandleClick.bind(this);
-    this.onHandleMouseDown = this.onHandleMouseDown.bind(this);
+    this.onMouseMoveOnSlider = this.onMouseMoveOnSlider.bind(this);
 
     this.state = {handleTop: 0, min, max, sliderValue};
   }
@@ -28,13 +31,13 @@ class Slider extends PureComponent{
   }
   getSliderColor(percentage){
     let sliderColor;
-    if(percentage < 0.4){
-      sliderColor = COLORS.LOW;
+    if(percentage < COLORS.LOW.value){
+      sliderColor = COLORS.LOW.color;
     }else{
-      if(percentage < 0.7){
-        sliderColor = COLORS.MEDIUM;
+      if(percentage < COLORS.MEDIUM.value){
+        sliderColor = COLORS.MEDIUM.color;
       }else{
-        sliderColor = COLORS.HIGH;
+        sliderColor = COLORS.HIGH.color;
       }
     }
     return sliderColor;
@@ -51,30 +54,33 @@ class Slider extends PureComponent{
     const percentage =  (sliderValue - min) / (max - min);
     const handleTop = (percentage * sliderHeight - handleHeight / 2) * 100 / sliderHeight;
 
-    // console.log('percentage', percentage, 'handleTop', handleTop);
-
     const sliderColor = this.getSliderColor(percentage);
     this.setState({handleTop, sliderColor});
   }
   componentWillReceiveProps(nextProps){
     this.updateSliderValue(nextProps);
   }
-  onSliderClick(event){
+  updateSlider(event){
     const {min, max, onChange, label} = this.props;
     const {handle} = this;
-    const elem = event.currentTarget;
+    const elem = this.slider;
     const elemOffset = elem.offsetParent.offsetTop;
     const clickedAtY = event.clientY;
     const diff = clickedAtY - elemOffset;
     const elemHeight = elem.clientHeight;
     const handleHeight = handle.clientHeight;
-    const handleTop = (diff - handleHeight/2) * 100 / elemHeight;
+    let handleTop = (diff - handleHeight/2) * 100 / elemHeight;
+
+    // Limit the values of the handle's top.
+    // This may be an issue while dragging the handle at the edges
+    if(handleTop < HANDLE_EDGE.TOP)
+      handleTop = HANDLE_EDGE.TOP;
+    if(handleTop > HANDLE_EDGE.BOTTOM)
+      handleTop = HANDLE_EDGE.BOTTOM;
+
     const percentage = diff / elemHeight;
 
     const sliderValue = Math.floor(min + (max - min) * percentage);
-
-    // console.log('clickedAtY', clickedAtY, 'elemOffset', elemOffset, 'diff', diff, 'elemHeight', elemHeight, 'handleHeight', handleHeight, 'handleTop', handleTop);
-    // console.log('min', min, 'max', max, 'percentage', percentage, 'sliderValue', sliderValue);
 
     const sliderColor = this.getSliderColor(percentage);
     if(onChange && this.state.sliderValue !== sliderValue){
@@ -83,13 +89,19 @@ class Slider extends PureComponent{
 
     this.setState({handleTop, sliderValue, sliderColor});
   }
-  onHandleClick(event){
-    event.stopPropagation();
-    console.log('DISABLED clicks on handle');
+  onMouseMoveOnSlider(event){
+    // event.buttons is not available on Safari, hence using event.nativeEvent.which
+    // https://github.com/facebook/react/issues/7122
+    const isPrimaryButtonCliced = (event.buttons === 1 || event.nativeEvent.which === 1);
+
+    if(event.target === this.handle && isPrimaryButtonCliced){
+      this.updateSlider(event)
+    }
   }
-  onHandleMouseDown(event){
-    console.log(event.clientY);
+  onSliderClick(event){
+    this.updateSlider(event);
   }
+
   render(){
     const {handleTop, sliderColor} = this.state;
     const {min, max, showRangeLabels, label} = this.props;
@@ -97,13 +109,17 @@ class Slider extends PureComponent{
     return (
       <div className='slider-wrapper'>
         <div className='sliderContainer'>
-          <div className='slider' onClick={this.onSliderClick} style={{backgroundColor: sliderColor}} ref={elem => {this.slider = elem;}}>
+          <div className='slider'
+               onClick={this.onSliderClick}
+               style={{backgroundColor: sliderColor}}
+               ref={elem => {this.slider = elem;}}
+               onMouseMove={this.onMouseMoveOnSlider}
+          >
             <div className='handle'
                  ref={elem => this.handle = elem}
-                 onClick={this.onHandleClick}
-                 onMouseDown={this.onHandleMouseDown}
                  style={{top: `${handleTop}%`}}
-            ></div>
+            >
+            </div>
             {showRangeLabels && <div className='minLabelContainer'>{minLabel}</div>}
             {showRangeLabels && <div className='maxLabelContainer'>{maxLabel}</div>}
           </div>
