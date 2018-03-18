@@ -14,7 +14,7 @@ class Visualizer extends Component{
       const value = frequency.value;
 
       const percentage = (value - min) / (max - min);
-      animProps[index] = percentage * 255;
+      animProps[index] = Math.floor(percentage * 255);
     }
     this.setState({animProps});
   }
@@ -28,6 +28,7 @@ class Visualizer extends Component{
     const side = '100px';
     const width = `${animProps[4] * 100 / 255}%`;
     const backgroundColor = `rgba(${animProps[0]}, ${animProps[1]}, ${animProps[2]}, ${animProps[3] / 255})`;
+
     return (
       <div>
         <div style={{width, height: side, backgroundColor}} className='visualizer'>

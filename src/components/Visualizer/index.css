@@ -1,9 +1,7 @@
 .visualizer{
     transition: width 1s, background-color 1s;
-    text-align: center;
-    font-style: italic;
-    font-weight: bold;
+    margin-left: 15px;
     margin-top: 50px;
-    display: table;
 }
+
 
