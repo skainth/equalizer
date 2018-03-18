@@ -6,7 +6,4 @@
     margin-top: 50px;
     display: table;
 }
-.visualizer > div{
-    display: table-cell;
-    vertical-align: middle;
-}
+

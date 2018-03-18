@@ -31,7 +31,6 @@ class Visualizer extends Component{
     return (
       <div>
         <div style={{width, height: side, backgroundColor}} className='visualizer'>
-          <div>{eq.name}</div>
         </div>
       </div>
     );

@@ -98,5 +98,30 @@
         "value": 10
       }
     ]
+  },
+  {
+    "name": "Custom",
+    "frequencies": [
+      {
+        "label": "60Hz",
+        "value": 0
+      },
+      {
+        "label": "310Hz",
+        "value": 0
+      },
+      {
+        "label": "1kHz",
+        "value": 0
+      },
+      {
+        "label": "6kHz",
+        "value": 0
+      },
+      {
+        "label": "16kHz",
+        "value": 0
+      }
+    ]
   }
 ]

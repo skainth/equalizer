@@ -3,6 +3,7 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import './index.css'
 import Slider from '../../components/SKSlider';
+import {deepClone} from "../../utils";
 
 class EqualizerContainer extends PureComponent {
   constructor(props){
@@ -26,8 +27,19 @@ class EqualizerContainer extends PureComponent {
     const {onEqChange} = this.props;
     onEqChange && onEqChange(selectedEq);
   }
-  sliderChangeHandler(){
-    this.notifyEqChange();
+  sliderChangeHandler(value, label){
+    this.setState((prevState) => {
+      const {selectedEq} = prevState;
+      const newSelectedEq = deepClone(selectedEq);
+
+      const frequencyToUpdate = newSelectedEq.frequencies.find((frequency => frequency.label === label));
+      frequencyToUpdate.value = value;
+      newSelectedEq.name = 'Custom';
+
+      return {selectedEq: newSelectedEq};
+    }, () => {
+      this.notifyEqChange();
+    })
   }
   handleDropdownChange(selectedOption){
     const selectedEq = this.props.eqs.find(eq => eq.name === selectedOption.value);
